@@ -2,6 +2,7 @@ import ora from "ora";
 import inquirer from "inquirer";
 import performTask from "../utils/spinner.js";
 import userPage from "./user.js";
+import encryptMessage from "../utils/encrypt.js";
 export default async function uploadPassword() {
   const password = await inquirer.prompt([
     {
@@ -26,6 +27,8 @@ export default async function uploadPassword() {
     spinner.start()
     await performTask();
     spinner.succeed("Password Save");
+    const encryptedMessage=encryptMessage(password.password, password.key);
+    console.log((await encryptedMessage));
     userPage()
   }
   catch

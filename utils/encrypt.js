@@ -1,7 +1,7 @@
 import crypto from "crypto"
 import decryptMessage from "./decrypt.js";
 import deriveKey from "./deriveKey.js";
-async function encryptMessage(message, givenString) {
+export default async function encryptMessage(message, givenString) {
   const salt = crypto.randomBytes(16); 
   const key = await deriveKey(givenString, salt); 
 
@@ -20,22 +20,22 @@ async function encryptMessage(message, givenString) {
 
 
 
-const givenString = 'encryption key';
-const message = 'This is a secret message.';
+// const givenString = 'encryption key';
+// const message = 'This is a secret message.';
 
 
-encryptMessage(message, givenString)
-  .then(result => {
-    console.log('Ciphertext:', result.ciphertext);
-    console.log('Salt:', result.salt);
-    console.log('IV:', result.iv);
+// encryptMessage(message, givenString)
+//   .then(result => {
+//     console.log('Ciphertext:', result.ciphertext);
+//     console.log('Salt:', result.salt);
+//     console.log('IV:', result.iv);
 
     
-    return decryptMessage(result.ciphertext, givenString, result.salt, result.iv);
-  })
-  .then(decryptedMessage => {
-    console.log('Decrypted Message:', decryptedMessage);
-  })
-  .catch(error => {
-    console.error('An error occurred:', error);
-  });
+//     return decryptMessage(result.ciphertext, givenString, result.salt, result.iv);
+//   })
+//   .then(decryptedMessage => {
+//     console.log('Decrypted Message:', decryptedMessage);
+//   })
+//   .catch(error => {
+//     console.error('An error occurred:', error);
+//   });
