@@ -6,14 +6,10 @@ import { createSpinner } from "nanospinner";
 import userOption from './pages/welcome.js'
 import sleep from "./utils/sleep.js";
 
-
-
-
-async function welcome()
-{
+async function welcome() {
     const rainbowTitle=chalkAnimation.rainbow("WELCOME TO PASSWORD KEEPER")
     await sleep();
     rainbowTitle.stop();
-    userOption();
+    await userOption();
 }
-welcome();
+await welcome();
