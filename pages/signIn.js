@@ -1,5 +1,6 @@
 import inquirer from "inquirer";
-
+import userPage from "./user.js";
+import ora from "ora";
 export default async function signIn() {
   const user = await inquirer.prompt([
     {
@@ -13,14 +14,9 @@ export default async function signIn() {
       message: "Enter your password",
     },
   ]);
+  // const { username, password } = user;
+  // console.log("Username:", username);
+  // console.log("Password:", password);
 
-  // You can add your logic here to process the user's input
-  // For example, you can check if the entered credentials are valid
-  // and perform any necessary authentication or authorization steps.
-  // You can also store the user's input or perform any other operations as needed.
-
-  // Example of accessing the username and password entered by the user:
-  const { username, password } = user;
-  console.log("Username:", username);
-  console.log("Password:", password);
+  await userPage()
 }
