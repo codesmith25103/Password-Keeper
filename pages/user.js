@@ -1,9 +1,11 @@
 import inquirer from "inquirer";
-
+import ora from "ora";
+import uploadPassword from "./uploadPassword.js";
+import performTask from "../utils/spinner.js";
 export default async function userPage() {
-  const option=inquirer.prompt([
+  const option=await inquirer.prompt([
     {
-      name: "option",
+      name: "options",
       type: "list",
       choices: [
         "Upload your Password",
@@ -11,6 +13,27 @@ export default async function userPage() {
         "Update Your Password",
         "LogOut",
       ],
-    },
+    },    
   ]);
+  const spinner=ora("Loading...").start();
+  try{
+    spinner.start();
+    await performTask();
+    spinner.stop()
+    if(option.options=="Upload your Password")
+    {
+      await uploadPassword();
+    }
+    else
+    {
+      spinner.succeed("Logging Out successfully")
+      return;
+    }
+  }
+  catch{
+    spinner.start()
+    await performTask();
+    spinner.fail("Error occure");
+  
+  }
 }

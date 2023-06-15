@@ -1,5 +1,7 @@
 import inquirer from "inquirer";
 import userOption from "./welcome.js";
+import performTask from "../utils/spinner.js";
+import ora from "ora";
 export default async function signUp() {
   const user = await inquirer.prompt([
     {
@@ -28,5 +30,15 @@ export default async function signUp() {
       message: "Confirm Your Key",
     },
   ]);
-  userOption();
+  const spinner=ora("Loading..").start();
+  try{
+    spinner.start();
+    await performTask();
+    spinner.succeed("User created");
+    userOption();
+  }
+  catch{
+    spinner.fail("Error Occur")
+  }
+ 
 }

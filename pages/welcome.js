@@ -24,7 +24,7 @@ export default async function userOption() {
       console.log("Closing application");
       return;
     }
-  } catch {
+  } catch(error) {
     spinner.fail("An error occurred");
     console.error(error);
   }
