@@ -2,10 +2,10 @@ import crypto from "crypto"
 import decryptMessage from "./decrypt.js";
 import deriveKey from "./deriveKey.js";
 async function encryptMessage(message, givenString) {
-  const salt = crypto.randomBytes(16); // Generate a random salt
-  const key = await deriveKey(givenString, salt); // Derive a key from the given string and salt
+  const salt = crypto.randomBytes(16); 
+  const key = await deriveKey(givenString, salt); 
 
-  const iv = crypto.randomBytes(16); // Generate a random IV
+  const iv = crypto.randomBytes(16); 
   const cipher = crypto.createCipheriv('aes-256-cbc', key, iv);
 
   let encrypted = cipher.update(message, 'utf8', 'hex');
