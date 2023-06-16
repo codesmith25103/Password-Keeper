@@ -13,23 +13,19 @@ import dotenv from 'dotenv';
 
 dotenv.config(); // Load environment variables from .env file
 
-const DB = "mongodb://root:root@main-shard-00-00-03xkr.mongodb.net:27017,main-shard-00-01-03xkr.mongodb.net:27017,main-shard-00-02-03xkr.mongodb.net:27017/main?ssl=true&replicaSet=Main-shard-0&authSource=admin&retryWrites=true";
-mongoose
-  .connect(DB, {
+// mongodb+srv://root:<password>@cluster0.j2xswwz.mongodb.net/?retryWrites=true&w=majority
+
+await mongoose
+  .connect("mongodb+srv://root:root@cluster0.j2xswwz.mongodb.net/PasswordKeeper?retryWrites=true&w=majority", {
     useNewUrlParser: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
-    useUnifiedTopology: true 
+    useUnifiedTopology: true,
   })
   .then(() => {
-    console.log("DB Connection successful");
-    app.listen(port, () => {
-      console.log(`Server running on port ${port}`);
-      welcome();
-    });
+    console.log("connected to db successfully");
   })
-  .catch((error) => {
-    console.error("DB Connection error:", error);
+  .catch((err) => {
+    console.log("errorrrrrrrrrrrrr");
+    console.log(err);
   });
 
 async function welcome() {
@@ -38,4 +34,4 @@ async function welcome() {
   rainbowTitle.stop();
   userOption();
 }
-//welcome();
+await welcome();
