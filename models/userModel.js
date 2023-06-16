@@ -31,7 +31,13 @@ const userSchema = new mongoose.Schema({
     confirmKey: {
         type: String,
         required: [true, 'Please confirm your key'],
-    }
+    },
+    userDetail:[
+        {
+            type:mongoose.Schema.Types.ObjectId,
+            ref:'UserDetail',
+        }
+    ]
 
 });
 
