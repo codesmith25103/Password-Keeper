@@ -3,6 +3,7 @@ import inquirer from "inquirer";
 import ora from "ora";
 import performTask from "../utils/spinner.js";
 import welcomeUser from "./welcomeUser.js";
+import { decrypt } from "dotenv";
 export default async function signIn() {
   const user = await inquirer.prompt([
     {

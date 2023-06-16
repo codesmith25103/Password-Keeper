@@ -10,26 +10,25 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Please enter your username!'],
         unique: true,
-        
     },
     password: {
         type: String,
         required: [true, 'Please enter your password!'],
-        minlength: 2,
-        maxlength: 16
+        // minlength: 2,
+        // maxlength: 16
 
     },
-    passwordConfirm: {
+    confirmPassword: {
         type: String,
         required: [true, 'Please confirm your password'],
     },
     key: {
         type: String,
         required: [true, 'Please enter your decryption key!'],
-        minlength: 2,
-        maxlength: 16
+        // minlength: 2,
+        // maxlength: 16
     },
-    keyConfirm: {
+    confirmKey: {
         type: String,
         required: [true, 'Please confirm your key'],
     }
