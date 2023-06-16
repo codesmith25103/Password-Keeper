@@ -1,7 +1,8 @@
 import inquirer from "inquirer";
-import userOption from "./welcome.js";
-import performTask from "../utils/spinner.js";
-import ora from "ora";
+import User from "../models/userModel.js";
+
+
+
 export default async function signUp() {
   const user = await inquirer.prompt([
     {
@@ -30,15 +31,23 @@ export default async function signUp() {
       message: "Confirm Your Key",
     },
   ]);
-  const spinner=ora("Loading..").start();
-  try{
-    spinner.start();
-    await performTask();
-    spinner.succeed("User created");
-    userOption();
+
+  try {
+    // Save the user data in the database
+    await signupUser(user);
+    console.log("Signup successful!");
+  } catch (error) {
+    console.error("Error occurred during signup:", error);
   }
-  catch{
-    spinner.fail("Error Occur")
-  }
- 
 }
+
+// Function to save user data in the database
+const signupUser = async (user) => {
+  try {
+    // Create a new user document in the database
+    const createdUser = await User.create(user);
+    console.log("User created:", createdUser);
+  } catch (error) {
+    throw new Error("Error occurred while saving user data");
+  }
+};

@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
  
 
 const userSchema = new mongoose.Schema({
@@ -15,17 +15,27 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: [true, 'Please enter your password!'],
-        minlength: 8,
+        minlength: 2,
         maxlength: 16
 
+    },
+    passwordConfirm: {
+        type: String,
+        required: [true, 'Please confirm your password'],
     },
     key: {
         type: String,
         required: [true, 'Please enter your decryption key!'],
-        minlength: 8,
+        minlength: 2,
         maxlength: 16
+    },
+    keyConfirm: {
+        type: String,
+        required: [true, 'Please confirm your key'],
     }
 
 });
 
 const User= mongoose.model('User', userSchema);
+
+export default User;

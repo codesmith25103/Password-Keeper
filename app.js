@@ -11,6 +11,7 @@ import sleep from "./utils/sleep.js";
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 
+
 dotenv.config(); // Load environment variables from .env file
 
 // mongodb+srv://root:<password>@cluster0.j2xswwz.mongodb.net/?retryWrites=true&w=majority
