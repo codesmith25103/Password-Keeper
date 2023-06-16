@@ -1,15 +1,16 @@
 import inquirer from "inquirer";
 import performTask from "../utils/spinner.js";
 import signUpFunc from "../auth/signUpfunc.js";
+import userOption from "./welcome.js";
 import ora from "ora";
-
+import User from "../models/userModel.js";
 
 export default async function signUp() {
   const user = await inquirer.prompt([
     {
-      name:"name", 
-      type:"input",
-      message:"Enter your name"
+      name: "name",
+      type: "input",
+      message: "Enter your name",
     },
     {
       name: "username",
@@ -37,17 +38,24 @@ export default async function signUp() {
       message: "Confirm Your Key",
     },
   ]);
-  const spinner=ora("saving...").start()
+ 
   try {
     // Save the user data in the database
-    signUpFunc(user);
-    spinner.start();
-    performTask();
-    spinner.stop()
-    spinner.succeed("Sign Up successfully")
+    const ifUserExist = await User.find({ username: user.username });
+    if (ifUserExist === []) {
+      const spinner = ora("saving...").start();
+      signUpFunc(user);
+      spinner.start();
+      performTask();
+      spinner.stop();
+      spinner.succeed("Sign Up successfully");
+    } else {
+      throw new Error("User already exist");
+    }
   } catch (error) {
-    console.error("Error occurred during signup:", error);
+    console.error("Error occurred during signup:", error.message);
   }
+  userOption();
 }
 
 // Function to save user data in the database
@@ -61,4 +69,3 @@ export default async function signUp() {
 //   } catch (error) {
 //     throw new Error("Error occurred while saving user data");
 //   }
-
