@@ -15,6 +15,8 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: [true, 'Please enter your password!'],
+        minlength: 8,
+        maxlength: 16
 
     },
     key: {
@@ -24,4 +26,6 @@ const userSchema = new mongoose.Schema({
         maxlength: 16
     }
 
-})
+});
+
+const User= mongoose.model('User', userSchema);
