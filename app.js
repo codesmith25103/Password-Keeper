@@ -38,3 +38,4 @@ async function welcome() {
   rainbowTitle.stop();
   userOption();
 }
+welcome();
