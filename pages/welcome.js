@@ -22,6 +22,7 @@ export default async function userOption() {
       await signUp();
     } else {
       console.log("Closing application");
+      process.exit(1)
       return;
     }
   } catch(error) {
