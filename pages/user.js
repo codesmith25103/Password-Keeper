@@ -1,6 +1,6 @@
 import inquirer from "inquirer";
 import ora from "ora";
-
+import userOption from "./welcome.js";
 import uploadPassword from "./uploadPassword.js";
 import performTask from "../utils/spinner.js";
 
@@ -26,7 +26,7 @@ export default async function userPage() {
       await uploadPassword();
     } else {
       spinner.succeed("Logging Out successfully");
-      return;
+      userOption();
     }
   } catch {
     spinner.start();
