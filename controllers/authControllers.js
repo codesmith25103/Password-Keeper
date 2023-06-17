@@ -1,28 +1,51 @@
 // const User = require('./../models/userModel');
 // const jwt = require('jsonwebtoken');
 import User from "../models/userModel.js";
-import  jwt  from "jsonwebtoken";
+import jwt from "jsonwebtoken";
+import AppError from "../utils/AppError.js";
+import { error } from "console";
+import userOption from "../pages/welcome.js";
 
-// exports.signup = async( req, res, next) =>{
-//     const newUser = await User.create({
-//         name: req.body.username,
-//         password: req.body.password
+import ora from "ora";
 
-//     });
-// const token = jwt.sign({id: newUser._id}, process.env.JWT_SECRET, {
-//     expiresIn: process.env.JWT_EXPRESS_IN      s
-// })
 
-// res.status(201).json({
-//     status: 'success',
-//     data: {
-//         user:newUser  
-//     }
 
-// })
-// }
+export default async function login(user) {
+    const userName = user.username;
+    const userPassword = user.password;
+    //check if username and password exist
+    if (!userName || !userPassword) {
+    
+        return Promise.reject(new Error('An error occurred'));
+    }
+    else {
+        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+            expiresIn: process.env.JWT_EXPIRES_IN
+        });
+        const validPassword= await bcrypt.compare(User.username, userPassword);
+        if(!validPassword)
+        {
+            return Promise.reject(new Error('An error occurred'));
+        }
+        else
+        {
+            const obj = {
+                status: "success",
+                statusCode: 201,
+                token
 
- 
-export default async function login(user){
+            }
+            return obj;
+        }
+
+    }
+    //
+
+    //if everything is ok 
+    const token = '';
+
+
+
+
 
 }

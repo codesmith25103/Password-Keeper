@@ -3,6 +3,7 @@ import inquirer from "inquirer";
 import ora from "ora";
 import performTask from "../utils/spinner.js";
 import welcomeUser from "./welcomeUser.js";
+import userOption from "../pages/welcome.js";
 import { decrypt } from "dotenv";
 import login from "../controllers/authControllers.js";
 export default async function signIn() {
@@ -27,11 +28,12 @@ export default async function signIn() {
     spinner.start();
     await performTask();
     spinner.stop();
-    login(user);
+    await login(user);
     await welcomeUser();
   }
   catch{
     spinner.fail("Error occur");
+    userOption();
   }
   
 }
