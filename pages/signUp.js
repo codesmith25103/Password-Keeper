@@ -42,7 +42,7 @@ export default async function signUp() {
   try {
     // Save the user data in the database
     const ifUserExist = await User.find({ username: user.username });
-    if (ifUserExist === []) {
+    if (Object.keys(ifUserExist).length===0) {
       const spinner = ora("saving...").start();
       signUpFunc(user);
       spinner.start();

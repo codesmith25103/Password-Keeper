@@ -1,25 +1,9 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 import validator from 'validator';
- 
+
 
 const userSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: [true, 'Please enter your name!']
-    },
-    username: {
-        type: String,
-        required: [true, 'Please enter your username!'],
-        unique: true,
-    },
-    password: {
-        type: String,
-        required: [true, 'Please enter your password!'],
-        // minlength: 2,
-        // maxlength: 16
-
-    },
     confirmPassword: {
         type: String,
         required: [true, 'Please confirm your password'],
@@ -53,15 +37,12 @@ const userSchema = new mongoose.Schema({
 userSchema.pre('save', async function(next){
     //only run this function if password was actually modified
     if(!this.isModified('password')) return next();
-    if(!this.isModified('key')) return next();
-    
+
     //hash the password with the cost of 12
     this.password = await bcrypt.hash(this.password, 12);
-    this.key = await bcrypt.hash(this.key, 12);
 
     //Delete passwordConfirm field
     this.confirmPassword = undefined;
-    this.confirmKey = undefined;
     next();
 
 })
