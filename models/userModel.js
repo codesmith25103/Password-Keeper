@@ -4,6 +4,19 @@ import validator from 'validator';
 
 
 const userSchema = new mongoose.Schema({
+    name:{
+        type:String,
+        required:[true, "name is required"]
+    },
+    username:{
+        type:String,
+        required:[true, "Username is required"],
+        unique:true
+    },
+    password:{
+        type:String,
+        required:[true, "Password is required"],
+    },
     confirmPassword: {
         type: String,
         required: [true, 'Please confirm your password'],
