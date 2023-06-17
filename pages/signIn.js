@@ -4,6 +4,7 @@ import ora from "ora";
 import performTask from "../utils/spinner.js";
 import welcomeUser from "./welcomeUser.js";
 import { decrypt } from "dotenv";
+import login from "../controllers/authControllers.js";
 export default async function signIn() {
   const user = await inquirer.prompt([
     {
@@ -26,6 +27,7 @@ export default async function signIn() {
     spinner.start();
     await performTask();
     spinner.stop();
+    login(user);
     await welcomeUser();
   }
   catch{
