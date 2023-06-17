@@ -1,14 +1,14 @@
 import User from "../models/userModel.js";
-import errorHandling from "../controllers/errorContoller.js";
 export default async function signUpFunc(user) {
-    // const spinner=ora("Checking...").start();
-    try{
-      const createdUser = new User(user);
-      createdUser.save();
+  try {
+    const createdUser = new User(user);
+    await createdUser.save();
+  } catch (error) {
+    if (error.name === 'ValidationError') {
+      const validationErrors = Object.values(error.errors).map(err => err.message);
+      return Promise.reject(new Error(validationErrors.join(', ')));
+    } else {
+      return Promise.reject(new Error('An error occurred during sign up.'));
     }
-    catch(err)
-    {
-      throw new error;
-    }
-  
+  }
 }
