@@ -1,5 +1,4 @@
 import inquirer from "inquirer";
-
 import ora from "ora";
 import performTask from "../utils/spinner.js";
 import welcomeUser from "./welcomeUser.js";

@@ -1,11 +1,15 @@
 import jwt from 'jsonwebtoken';
 import {promisify} from 'util';
 import User from '../models/userModel.js';
-export default async function verifyToken(token){
-
-    if(token===undefined || !token)
+export default async function verifyToken(verifyObj){
+    if(verifyObj===undefined)
     {
         return Promise.reject(new Error('An error occurred'));
+    }
+    const token=verifyObj.token;
+    if(token===undefined || !token)
+    {
+        return Promise.reject(new Error('An error occurred during sign up.'));
     }
     //verify token
     const decoded = await promisify(jwt.verify)(token, "secret");
