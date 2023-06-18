@@ -4,6 +4,7 @@ import userOption from "./welcome.js";
 import uploadPassword from "./uploadPassword.js";
 import performTask from "../utils/spinner.js";
 import verifyToken from "../utils/verifyToken.js";
+import seeYourPassword from "./seeYourPassword.js";
 export default async function userPage(loginObject=undefined) {
   try {
   const spinner = ora("Loading...").start();
@@ -30,7 +31,7 @@ export default async function userPage(loginObject=undefined) {
     }
     else if(option.options=="See Your Password")
     {
-      await uploadPassword(loginObject)
+      await seeYourPassword(loginObject)
     } else {
       spinner.succeed("Logging Out successfully");
       userOption();

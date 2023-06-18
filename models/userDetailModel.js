@@ -13,7 +13,8 @@ const userDetailSchema = new mongoose.Schema({
   },
   iv: {
     type: String,
-  },
+  }
+
 });
 
 const UserDetail= mongoose.model('UserDetail', userDetailSchema);
