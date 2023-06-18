@@ -47,7 +47,7 @@ export default async function uploadPassword(loginObject) {
         iv: encryptedMessage.iv
       }
       console.log(passwordDetail);
-      await userAllPassword(passwordDetail);
+      await userAllPassword(passwordDetail, loginObject);
       userPage(loginObject);
     } catch (error) {
       spinner.fail("Password not saved, error occure");
