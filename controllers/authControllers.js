@@ -19,23 +19,26 @@ export default async function login(user) {
         return Promise.reject(new Error('An error occurred'));
     }
     else {
-        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+        const token = jwt.sign({ id: User._id }, process.env.JWT_SECRET, {
             expiresIn: process.env.JWT_EXPIRES_IN
         });
-        const validPassword= await bcrypt.compare(User.username, userPassword);
+        const validPassword = await bcrypt.compare(userPassword, User.password);
+        console.log(User.password);
+        console.log(userPassword);
         if(!validPassword)
         {
             return Promise.reject(new Error('An error occurred'));
         }
         else
         {
-            const obj = {
-                status: "success",
-                statusCode: 201,
-                token
+            const tokenObject = {
 
+                status: "sucess",
+                statusCode: "201",
+                token
             }
-            return obj;
+
+            return tokenObject;
         }
 
     }

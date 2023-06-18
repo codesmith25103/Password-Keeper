@@ -28,8 +28,9 @@ export default async function signIn() {
     spinner.start();
     await performTask();
     spinner.stop();
-    await login(user);
-    await welcomeUser();
+    const loginObject = await login(user);
+    
+    await welcomeUser(loginObject);
   }
   catch{
     spinner.fail("Error occur");
