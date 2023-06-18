@@ -29,7 +29,6 @@ export default async function signIn() {
     await performTask();
     spinner.stop();
     const loginObject = await login(user);
-    
     await welcomeUser(loginObject);
   }
   catch{
