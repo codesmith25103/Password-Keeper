@@ -5,6 +5,7 @@ import uploadPassword from "./uploadPassword.js";
 import performTask from "../utils/spinner.js";
 
 export default async function userPage() {
+  const user=verifytoken();
   const option = await inquirer.prompt([
     {
       name: "options",
