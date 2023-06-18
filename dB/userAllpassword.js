@@ -9,8 +9,8 @@ export default async function userAllPassword(userDetail, loginObject) {
         console.log(createPassword);
         freshUser.userDetail.push(createPassword); // Add the new UserDetail object to the userDetail array
         await createPassword.save();
-        await freshUser.save({ validateBeforeSave: false }); // Save the updated freshUser object with the new userDetail
-        
+        const u2=await freshUser.save({ validateBeforeSave: false }); 
+        // Save the updated freshUser object with the new userDetail
     } catch (error) {
         console.log("Couldn't save the password", error);
     }

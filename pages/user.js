@@ -27,6 +27,10 @@ export default async function userPage(loginObject=undefined) {
  
     if (option.options == "Upload your Password") {
       await uploadPassword(loginObject);
+    }
+    else if(option.options=="See Your Password")
+    {
+      await uploadPassword(loginObject)
     } else {
       spinner.succeed("Logging Out successfully");
       userOption();
