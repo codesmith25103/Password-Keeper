@@ -3,9 +3,9 @@ import ora from "ora";
 import userOption from "./welcome.js";
 import uploadPassword from "./uploadPassword.js";
 import performTask from "../utils/spinner.js";
-
-export default async function userPage() {
-  const user=verifytoken();
+import verifyToken from "../utils/verifyToken.js";
+export default async function userPage(loginObject) {
+  const user=verifyToken(loginObject.token);
   const option = await inquirer.prompt([
     {
       name: "options",

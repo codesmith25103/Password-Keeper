@@ -4,7 +4,6 @@ import signUpFunc from "../auth/signUpfunc.js";
 import userOption from "./welcome.js";
 import ora from "ora";
 import User from "../models/userModel.js";
-
 export default async function signUp() {
   const user = await inquirer.prompt([
     {
@@ -52,6 +51,5 @@ export default async function signUp() {
   } catch (error) {
     console.error("Error occurred during signup:", error.message);
   }
-
   userOption();
 }

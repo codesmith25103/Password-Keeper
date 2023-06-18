@@ -3,9 +3,10 @@ import sleep from "../utils/sleep.js";
 import signIn from "./signIn.js";
 import userPage from "./user.js";
 import verifyToken from "../utils/verifyToken.js";
-export default async function welcomeUser(tokenObject) {
+export default async function welcomeUser(loginObject) {
   try{
-  verifyToken(tokenObject);
+    console.log("welcome");
+  await verifyToken(loginObject.token);
   figlet("Welcome  Lata", function (err, data) {
     if (err) {
       console.log("Something went wrong...");
@@ -15,12 +16,11 @@ export default async function welcomeUser(tokenObject) {
     console.log(data);
   });
   await sleep();
-  await userPage();
+  await userPage(loginObject);
 
 }
 catch(err) {
   console.log("Login failed", err);
   signIn();
-
 }
 }
