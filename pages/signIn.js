@@ -1,5 +1,4 @@
 import inquirer from "inquirer";
-
 import ora from "ora";
 import performTask from "../utils/spinner.js";
 import welcomeUser from "./welcomeUser.js";
@@ -27,14 +26,8 @@ export default async function signIn() {
     spinner.start();
     await performTask();
     spinner.stop();
-<<<<<<< HEAD
-    const loginObject = await login(user);
-    
-    await welcomeUser(loginObject);
-=======
     login(user);
     await welcomeUser();
->>>>>>> 10d1b39 (done)
   }
   catch{
     spinner.fail("Error occur");
