@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 import validator from 'validator';
-
+import UserDetail from './userDetailModel.js';
 const userSchema = new mongoose.Schema({
     name:{
         type:String,
