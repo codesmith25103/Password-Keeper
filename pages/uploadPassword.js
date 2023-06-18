@@ -33,12 +33,24 @@ export default async function uploadPassword(loginObject) {
       },
     ]);
 
-    spinner.succeed("Password Save");
-    const encryptedMessage = encryptMessage(password.password, password.key);
-    console.log(await encryptedMessage);
-    userPage(loginObject);
-  } catch(error) {
-    spinner.fail("Password not saved, error occure");
-    console.log(error)
+      
+    
+      //await userAllPassword(password);
+      spinner.succeed("Password Save");
+      const encryptedMessage =await encryptMessage(password.password, password.key);
+      
+      console.log("Hare", encryptedMessage);
+      const passwordDetail = {
+        userId: password.userId,
+        ciphertext: encryptedMessage.ciphertext,
+        salt: encryptedMessage.salt,
+        iv: encryptedMessage.iv
+      }
+      console.log(passwordDetail);
+      await userAllPassword(passwordDetail);
+      userPage(loginObject);
+    } catch (error) {
+      spinner.fail("Password not saved, error occure");
+      console.log(error)
+    }
   }
-}
