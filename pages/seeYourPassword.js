@@ -1,6 +1,7 @@
 import inquirer from "inquirer";
 import decryptMessage from "../utils/decrypt";
 export default async function seeYourPassword() {
+  verifytoken(token);
   let exampleChoice = ["harry", "sankalp"];
   const passwords = await inquirer.prompt([
     {

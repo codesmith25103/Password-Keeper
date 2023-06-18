@@ -3,8 +3,14 @@ import ora from "ora";
 import userOption from "./welcome.js";
 import uploadPassword from "./uploadPassword.js";
 import performTask from "../utils/spinner.js";
-
-export default async function userPage() {
+import verifyToken from "../utils/verifyToken.js";
+export default async function userPage(loginObject=undefined) {
+  try {
+  const spinner = ora("Loading...").start();
+  spinner.start();
+  await performTask();
+  spinner.stop();
+  const user = verifyToken(loginObject);
   const option = await inquirer.prompt([
     {
       name: "options",
@@ -17,20 +23,19 @@ export default async function userPage() {
       ],
     },
   ]);
-  const spinner = ora("Loading...").start();
-  try {
-    spinner.start();
-    await performTask();
-    spinner.stop();
+
+ 
     if (option.options == "Upload your Password") {
-      await uploadPassword();
+      await uploadPassword(loginObject);
     } else {
       spinner.succeed("Logging Out successfully");
       userOption();
     }
-  } catch {
-    spinner.start();
-    await performTask();
-    spinner.fail("Error occure");
+  } catch (error) {
+    console.log(error);
+    // spinner.start();
+    // await performTask();
+    spinner.fail("You are not login");
+    userOption()
   }
 }

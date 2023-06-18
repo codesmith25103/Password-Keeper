@@ -1,9 +1,7 @@
 import inquirer from "inquirer";
-
 import ora from "ora";
 import performTask from "../utils/spinner.js";
 import welcomeUser from "./welcomeUser.js";
-import userOption from "../pages/welcome.js";
 import { decrypt } from "dotenv";
 import login from "../controllers/authControllers.js";
 export default async function signIn() {
@@ -28,12 +26,14 @@ export default async function signIn() {
     spinner.start();
     await performTask();
     spinner.stop();
-    const loginObject = await login(user);
+    console.log("Login")
+    let loginObject= await login(user);
+    console.log(loginObject);
+    console.log("Login2");
     await welcomeUser(loginObject);
   }
   catch{
     spinner.fail("Error occur");
-    userOption();
   }
   
 }
