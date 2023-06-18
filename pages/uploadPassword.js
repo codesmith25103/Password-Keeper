@@ -4,6 +4,9 @@ import performTask from "../utils/spinner.js";
 import userPage from "./user.js";
 import encryptMessage from "../utils/encrypt.js";
 import verifyToken from "../utils/verifyToken.js";
+import userAllPassword from "../dB/userAllpassword.js";
+import UserDetail from "../models/userDetailModel.js";
+
 export default async function uploadPassword(loginObject) {
   const spinner = ora("Saving...").start();
   spinner.start();
@@ -30,12 +33,24 @@ export default async function uploadPassword(loginObject) {
       },
     ]);
 
-    spinner.succeed("Password Save");
-    const encryptedMessage = encryptMessage(password.password, password.key);
-    console.log(await encryptedMessage);
-    userPage();
-  } catch(error) {
-    spinner.fail("Password not saved, error occure");
-    console.log(error)
+      
+    
+      //await userAllPassword(password);
+      spinner.succeed("Password Save");
+      const encryptedMessage = encryptMessage(password.password, password.key);
+      
+      console.log(await encryptedMessage);
+      const passwordDetail = {
+        userId: password.userId,
+        ciphertext: encryptMessage.ciphertext,
+        salt: encryptMessage.salt,
+        iv: encryptMessage.iv
+      }
+      await userAllPassword(passwordDetail);
+      userPage(loginObject);
+    } catch (error) {
+      spinner.fail("Password not saved, error occure");
+      console.log(error)
+    }
   }
-}
+
