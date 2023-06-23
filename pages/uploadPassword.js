@@ -39,7 +39,7 @@ export default async function uploadPassword(loginObject) {
       spinner.succeed("Password Save");
       const encryptedMessage =await encryptMessage(password.password, password.key);
       
-      console.log("Hare", encryptedMessage);
+      //console.log("Hare", encryptedMessage);
       const passwordDetail = {
         userId: password.userId,
         ciphertext: encryptedMessage.ciphertext,
@@ -47,7 +47,7 @@ export default async function uploadPassword(loginObject) {
         iv: encryptedMessage.iv
       }
      
-      console.log(passwordDetail);
+      //console.log(passwordDetail);
       await userAllPassword(passwordDetail, loginObject);
 
       userPage(loginObject);

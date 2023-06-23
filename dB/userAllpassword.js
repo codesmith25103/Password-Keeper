@@ -6,7 +6,7 @@ export default async function userAllPassword(userDetail, loginObject) {
         let freshUser = await verifyToken(loginObject);
         console.log(freshUser);
         const createPassword = new UserDetail(userDetail);
-        console.log(createPassword);
+        //console.log(createPassword);
         freshUser.userDetail.push(createPassword); // Add the new UserDetail object to the userDetail array
         await createPassword.save();
         const u2=await freshUser.save({ validateBeforeSave: false }); 

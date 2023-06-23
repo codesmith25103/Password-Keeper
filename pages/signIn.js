@@ -17,19 +17,16 @@ export default async function signIn() {
       message: "Enter your password",
     },
   ]);
-  // const { username, password } = user;
-  // console.log("Username:", username);
-  // console.log("Password:", password);
+  
   const spinner = ora("Loading...").start();
   try
   {
     spinner.start();
     await performTask();
     spinner.stop();
-    console.log("Login")
+   // console.log("Login")
     let loginObject= await login(user);
-    console.log(loginObject);
-    console.log("Login2");
+  
     await welcomeUser(loginObject);
   }
   catch{
