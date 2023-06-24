@@ -6,6 +6,8 @@ import encryptMessage from "../utils/encrypt.js";
 import verifyToken from "../utils/verifyToken.js";
 import userAllPassword from "../dB/userAllpassword.js";
 import UserDetail from "../models/userDetailModel.js";
+import bcrypt from "bcryptjs"
+// import decryptMessage from "../utils/decrypt.js";
 
 export default async function uploadPassword(loginObject) {
   const spinner = ora("Saving...").start();
@@ -33,13 +35,17 @@ export default async function uploadPassword(loginObject) {
       },
     ]);
 
-      
-    
+      const checkingKey=await bcrypt.compare(password.key, freshUser.key)
+      if(!checkingKey)
+      {
+        throw new Error("Key is invalid");
+      }
+
       //await userAllPassword(password);
       spinner.succeed("Password Save");
       const encryptedMessage =await encryptMessage(password.password, password.key);
       
-      //console.log("Hare", encryptedMessage);
+  
       const passwordDetail = {
         userId: password.userId,
         ciphertext: encryptedMessage.ciphertext,
