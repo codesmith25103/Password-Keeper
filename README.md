@@ -3,3 +3,6 @@
 
 
 ![image](https://github.com/lata-11/Password-Keeper/assets/103296906/d1f66d19-66cc-4c56-b76e-f5f72f9feead)
+
+
+![image](https://github.com/lata-11/Password-Keeper/assets/103296906/828256df-3154-45c7-b4bd-569c7ce7bfd3)
