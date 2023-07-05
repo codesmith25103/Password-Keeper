@@ -25,12 +25,12 @@ export default async function uploadPassword(loginObject) {
       },
       {
         name: "password",
-        type: "input",
+        type: "password",
         message: "Enter Password",
       },
       {
         name: "key",
-        type: "input",
+        type: "password",
         message: "Enter your key",
       },
     ]);
