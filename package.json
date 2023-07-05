@@ -13,6 +13,7 @@
     "bcryptjs": "^2.4.3",
     "chalk": "^5.2.0",
     "chalk-animation": "^2.0.3",
+    "colors": "^1.4.0",
     "crypto": "^1.0.1",
     "dotenv": "^16.1.4",
     "express": "^4.18.2",

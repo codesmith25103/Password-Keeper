@@ -1,14 +1,11 @@
+import verifyToken from "../utils/verifyToken.js"
+import UserDetail from "../models/userDetailModel.js";
+import encryptMessage from "../utils/encrypt.js";
 import inquirer from "inquirer";
-//import decryptMessage from "../utils/decrypt";
-import mongoose from "mongoose";
 import User from "../models/userModel.js";
-import performTask from "../utils/spinner.js";
-import verifyToken from "../utils/verifyToken.js";
-import bcrypt from "bcryptjs";
-import decryptMessage from "../utils/decrypt.js";
+import bcrypt from "bcryptjs"
 import userPage from "./user.js";
-import colors from "colors";
-export default async function seeYourPassword(loginObject) {
+export default async function updatePassword(loginObject) {
   try {
     const userIdList = await verifyToken(loginObject);
     const detailList = await User.findById(userIdList._id).populate(
@@ -27,6 +24,11 @@ export default async function seeYourPassword(loginObject) {
         choices: exampleChoice,
       },
       {
+        name:"newPassword",
+        type:"input",
+        message:"Enter New Password",
+      },
+      {
         name: "key",
         type: "input",
         message: "Enter your key",
@@ -43,9 +45,17 @@ export default async function seeYourPassword(loginObject) {
           break;
         }
       }
-      const decryptPassword=await decryptMessage(UserPassword.ciphertext, passwords.key, UserPassword.salt, UserPassword.iv)
-      console.log(`Password for ${passwords.userId} is ${decryptPassword}`.green);
+      const encryptedText=await encryptMessage(passwords.newPassword, passwords.key);
+      const user=await UserDetail.findOneAndUpdate({_id:UserPassword._id}, {
+        ciphertext:encryptedText.ciphertext,
+        salt:encryptedText.salt,
+        iv:encryptedText.iv,
+      },
+      { useFindAndModify: false });
+      user.save();
+    //   console.log(user);
       userPage(loginObject);
+
     }
   } catch (err) {
     console.log(err.message);

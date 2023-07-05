@@ -5,7 +5,7 @@ import userPage from "./user.js";
 import verifyToken from "../utils/verifyToken.js";
 export default async function welcomeUser(loginObject=undefined) {
   try {
-    console.log("welcome");
+
     const freshUser = await verifyToken(loginObject);
     figlet(`Welcome  ${freshUser.name}`, function (err, data) {
       if (err) {

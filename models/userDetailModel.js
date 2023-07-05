@@ -2,8 +2,7 @@ import mongoose from "mongoose";
 const userDetailSchema = new mongoose.Schema({
   userId: {
     type: String,
-    unique: true,
-    required: [true, "User Id must be unique and required"],
+    required: [true, "User Id must be required"],
   },
   ciphertext: {
     type: String,
