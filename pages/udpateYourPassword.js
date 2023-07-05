@@ -25,12 +25,12 @@ export default async function updatePassword(loginObject) {
       },
       {
         name:"newPassword",
-        type:"input",
+        type: "password",
         message:"Enter New Password",
       },
       {
         name: "key",
-        type: "input",
+        type: "password",
         message: "Enter your key",
       },
     ]);
